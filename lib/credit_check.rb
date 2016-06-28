@@ -1,14 +1,13 @@
+require "pry"
+puts "What is your card number?"
+card_number = gets.chomp
 class CreditCheck
 
   def inititalize
-    @card_numner = get_card #method name
+    @card_number = card_number
   end
 
-  def get_card
-    puts "What is your card number?"
-    gets.chomp
-  end
-
+  binding.pry
 end
 
 CreditCheck.new

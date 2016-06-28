@@ -4,7 +4,6 @@ class CreditCheck
 
   def initialize
     @credit_card = "4024007136512380" #valid
-    @valid = false
     start
   end
 
