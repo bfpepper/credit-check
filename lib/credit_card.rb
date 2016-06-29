@@ -3,41 +3,47 @@ require "pry"
 class CreditCard
 
   def initialize(card_number)
-    @card_number = card_number.rjust(16, "0") 
+    @card_number = card_number.rjust(16, "0")
   end
 
   def start
-    thing = split_into_arrays #change name
-    thing1 = sum_results(thing)
-    binding.pry
-    is_card_valid?(thing1)
+    if @card_number == @card_number.to_i.to_s
+      split_card = card_array
+      added_card_numbers = sum_results(split_card)
+      is_card_valid?(added_card_numbers)
+    else
+      "This is not a valid card."
+    end
   end
 
 
-  def split_into_arrays
-    split_digits = @card_number.split("").map{|num| num.to_i}
-    each_index = [] #change name
-    split_digits.each_with_index do |num , index|
+  def card_array
+    modified_card = []
+    turn_card_into_int.each_with_index do |num , index|
       if index.even?
-        each_index << combine_numbers(num * 2)
+        modified_card << combine_numbers(num * 2)
       else
-        each_index << num
+        modified_card << num
       end
     end
-    each_index
+    modified_card
   end
 
     def combine_numbers(num)
       num.to_s.split("").map{|num| num.to_i}.reduce(:+)
     end
 
-    def sum_results(thing)
-      thing.flatten.reduce(:+)
-    #@even_card.zip(convert_odd).flatten.reduce(:+)
+    def sum_results(split_card)
+      split_card.flatten.reduce(:+)
     end
 
-    def is_card_valid?(thing1)
-      thing1 %10 == 0 ? puts("Card is valid") : puts("card is invalid")
+    def is_card_valid?(added_card_numbers)
+      added_card_numbers %10 == 0 ? "Card is valid" : "Card is invalid"
     end
+
+    def turn_card_into_int
+      @card_number.split("").map{|num| num.to_i}
+    end
+
 
   end
