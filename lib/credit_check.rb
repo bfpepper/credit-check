@@ -4,5 +4,4 @@ require "pry"
 puts "What is your card number?"
 card_number = gets.chomp
 
-c = CreditCard.new(card_number)
-c.start
+CreditCard.new(card_number).start
