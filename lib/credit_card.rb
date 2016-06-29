@@ -18,12 +18,11 @@ class CreditCard
 
 
   def card_array
-    modified_card = []
-    turn_card_into_int.each_with_index do |num , index|
+    modified_card = turn_card_into_int.each_with_index.map do |num , index|
       if index.even?
-        modified_card << combine_numbers(num * 2)
+        combine_numbers(num * 2)
       else
-        modified_card << num
+        num
       end
     end
     modified_card
