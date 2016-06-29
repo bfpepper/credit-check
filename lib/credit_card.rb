@@ -1,5 +1,3 @@
-require "pry"
-
 class CreditCard
 
   def initialize(card_number)
@@ -15,7 +13,6 @@ class CreditCard
       "This is not a valid card."
     end
   end
-
 
   def card_array
     modified_card = turn_card_into_int.each_with_index.map do |num , index|
@@ -43,6 +40,5 @@ class CreditCard
     def turn_card_into_int
       @card_number.split("").map{|num| num.to_i}
     end
-
 
   end

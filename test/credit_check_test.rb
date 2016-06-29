@@ -32,4 +32,15 @@ class CreditCardTest < Minitest::Test
     assert_equal [0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4], CreditCard.new(number).card_array
   end
 
+  def test_it_can_combine_two_numbers_to_one
+    number = "18"
+    assert_equal 9, @credit_card.combine_numbers(number)
+  end
+
+  # def test_it_can_validate_card
+  #   card = "10"
+  #   card_number = "10"
+  #   assert_equal "Card is valid", CreditCard.new(card_number).is_card_valid?(card)
+  # end
+
 end
