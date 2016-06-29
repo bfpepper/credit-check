@@ -12,7 +12,7 @@ class CreditCheckTest < Minitest::Test
     assert_instance_of CreditCheck, @credit_check
   end
 
-  def test_it_can_split_into_two_arrays
+  def 
   end
 
 end

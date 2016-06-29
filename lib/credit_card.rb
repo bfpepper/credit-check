@@ -3,35 +3,41 @@ require "pry"
 class CreditCard
 
   def initialize(card_number)
-    @card_number = card_number
+    @card_number = card_number.rjust(16, "0") 
   end
 
   def start
-    split_into_arrays
-    convert_odd
-    sum_results
-    is_card_valid
+    thing = split_into_arrays #change name
+    thing1 = sum_results(thing)
+    binding.pry
+    is_card_valid?(thing1)
   end
+
 
   def split_into_arrays
-    @even_card = @card_number.split("").values_at(-1, -3, -5, -7, -9, -11, -13, -15).map{|num| num.to_i}
-    @odd_card = @card_number.split("").values_at(-2, -4, -6, -8, -10, -12, -14, -16).map{|num| num.to_i}.map{|num| num * 2}
+    split_digits = @card_number.split("").map{|num| num.to_i}
+    each_index = [] #change name
+    split_digits.each_with_index do |num , index|
+      if index.even?
+        each_index << combine_numbers(num * 2)
+      else
+        each_index << num
+      end
+    end
+    each_index
   end
 
-  def convert_odd
-    @odd_final = @odd_card.map{|num| combine_numbers(num)}
-  end
+    def combine_numbers(num)
+      num.to_s.split("").map{|num| num.to_i}.reduce(:+)
+    end
 
-  def combine_numbers(num)
-    num.to_s.split("").map{|num| num.to_i}.reduce(:+)
-  end
+    def sum_results(thing)
+      thing.flatten.reduce(:+)
+    #@even_card.zip(convert_odd).flatten.reduce(:+)
+    end
 
-  def sum_results
-    @summed_results = @even_card.zip(@odd_final).flatten.reduce(:+)
-  end
+    def is_card_valid?(thing1)
+      thing1 %10 == 0 ? puts("Card is valid") : puts("card is invalid")
+    end
 
-  def is_card_valid
-    @summed_results %10 == 0 ? puts("Card is valid") : puts("card is invalid")
   end
-
-end
