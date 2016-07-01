@@ -5,7 +5,7 @@ class CreditCard
   end
 
   def start
-    if @card_number == @card_number.to_i.to_s
+    if @card_number == @card_number.to_i.to_s.rjust(16, "0")
       split_card = card_array
       added_card_numbers = sum_results(split_card)
       is_card_valid?(added_card_numbers)
